@@ -18,5 +18,12 @@
         }
     ],
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wdog\\Ping\\PingServiceProvider"
+            ]
+        }
+    }
 }
