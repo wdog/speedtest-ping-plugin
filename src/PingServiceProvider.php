@@ -15,6 +15,6 @@ class PingServiceProvider extends PackageServiceProvider
             ->name(static::$name)
             ->hasMigration('create_wdog_ping_tables')
             ->runsMigrations()
-            ->hasConfigFile();
+            ;
     }
 }
