@@ -1,0 +1,22 @@
+{
+    "name": "wdog/ping",
+    "license": "MIT",
+    "type": "library",
+    "description": "Speedtest Ping Plugin",
+    "require": {
+        "filament/support": "3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wdog\\Ping\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wdog",
+            "email": "wdog666@gmail.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
