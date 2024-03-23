@@ -5,7 +5,7 @@ namespace Wdog\Ping;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class PingProvider extends PackageServiceProvider
+class PingServiceProvider extends PackageServiceProvider
 {
 
     public static string $name = 'wdog-ping';
