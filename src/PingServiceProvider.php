@@ -4,6 +4,7 @@ namespace Wdog\Ping;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Wdog\Ping\Commands\WdogPingInstall;
 
 class PingServiceProvider extends PackageServiceProvider
 {
@@ -13,6 +14,7 @@ class PingServiceProvider extends PackageServiceProvider
     {
         $package
             ->name(static::$name)
-            ->hasMigration('create_wdog_ping_tables');
+            ->hasMigration('create_wdog_ping_tables')
+            ->hasCommand(Install::class);
     }
 }
