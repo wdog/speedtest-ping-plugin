@@ -7,10 +7,13 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class PingProvider extends PackageServiceProvider
 {
+
+    public static string $name = 'wdog-ping';
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('ping')
+            ->name(static::$name)
+            ->hasMigration('create_wdog_ping_tables')
             ->hasConfigFile();
     }
 }
