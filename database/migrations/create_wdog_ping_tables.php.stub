@@ -38,6 +38,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('ping_results');
         Schema::dropIfExists('ping_hosts');
-        
+
     }
 };
