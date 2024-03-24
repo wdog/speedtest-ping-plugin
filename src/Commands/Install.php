@@ -25,6 +25,6 @@ class Install extends Command
      */
     public function handle()
     {
-        echo "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+        echo \Carbon\Carbon::now();
     }
 }
