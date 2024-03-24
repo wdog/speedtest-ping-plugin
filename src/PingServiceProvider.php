@@ -19,6 +19,7 @@ class PingServiceProvider extends PackageServiceProvider
             ->runsMigrations(true)
             ->hasCommand(Install::class)
             ->hasInstallCommand(function (InstallCommand $command) {
+                echo "INSTALL";
                 $command
                     ->publishMigrations()
                     ;
