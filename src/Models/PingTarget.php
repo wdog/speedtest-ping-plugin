@@ -16,7 +16,11 @@ class PingTarget extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'target_ip',
+        'target_name',
+        'target_schedule',
+    ];
 
     /**
      * The attributes that should be cast.

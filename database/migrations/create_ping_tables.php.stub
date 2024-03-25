@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('ping_targets', function (Blueprint $table) {
             $table->id();
-            $table->string('target_ip')->nullable();
-            $table->string('target_name')->nullable();
+            $table->string('target_ip',15)->required();
+            $table->string('target_name',80)->required();
+            $table->string('target_schedule',20)->nullable();
             $table->timestamps();
         });
         Schema::create('ping_results', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(PingTarget::class);
             $table->float('ping', 8, 3);
-            $table->boolean('scheduled')->default(false);
             $table->json('data'); // is a dump of the cli output in case we want more fields later
             $table->timestamps();
         });
