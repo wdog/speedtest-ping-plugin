@@ -3,8 +3,8 @@
     "license": "MIT",
     "description": "Speedtest Ping Plugin",
     "require": {
-        "filament/support": "3.2",
-        "filament/filament": "3.2"
+        "filament/support": "^3.2",
+        "filament/filament": "^3.2"
     },
     "autoload": {
         "psr-4": {
