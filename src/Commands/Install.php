@@ -11,14 +11,14 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'ping:install';
+    protected $signature = 'ping:test';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install Ping Plugin';
+    protected $description = 'Test Ping Plugin';
 
     /**
      * Execute the console command.

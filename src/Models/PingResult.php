@@ -54,8 +54,8 @@ class PingResult extends Model
         );
     }
 
-    public function pingHost(): BelongsTo
+    public function PingTarget(): BelongsTo
     {
-        return $this->belongsTo(PingHost::class);
+        return $this->belongsTo(PingTarget::class);
     }
 }
