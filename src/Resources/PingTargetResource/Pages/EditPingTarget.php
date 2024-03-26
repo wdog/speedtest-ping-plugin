@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wdog\Ping\Resources\PingTargetResource\Pages;
 
 use Filament\Actions;

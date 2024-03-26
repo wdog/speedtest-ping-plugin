@@ -2,23 +2,21 @@
 
 namespace Wdog\Ping\Resources;
 
-
 use App\Rules\Cron;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Wdog\Ping\Models\PingTarget;
-use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
+use Wdog\Ping\Models\PingTarget;
+use Wdog\Ping\Resources\PingTargetResource\Pages\CreatePingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\EditPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ListPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ViewPingTarget;
-use Wdog\Ping\Resources\PingTargetResource\Pages\CreatePingTarget;
 use Wdog\Ping\Resources\PingTargetResource\RelationManagers\PingResultsRelationManager;
 
 class PingTargetResource extends Resource
@@ -30,7 +28,6 @@ class PingTargetResource extends Resource
     protected static ?string $navigationGroup = 'Ping';
 
     protected static ?string $navigationLabel = 'Targets';
-
 
     public static function form(Form $form): Form
     {
@@ -49,7 +46,7 @@ class PingTargetResource extends Resource
                         ->rules([new Cron()])
                         ->helperText('Leave empty to disable scheduled tests.')
                         ->hint(new HtmlString('&#x1f517;<a href="https://crontab.cronhub.io/" target="_blank" rel="nofollow">Cron Generator</a>'))
-                        ->nullable()
+                        ->nullable(),
 
                 ])->columns(3),
             ]);
@@ -84,7 +81,7 @@ class PingTargetResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PingResultsRelationManager::class
+            PingResultsRelationManager::class,
         ];
     }
 

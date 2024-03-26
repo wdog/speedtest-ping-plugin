@@ -2,9 +2,8 @@
 
 namespace Wdog\Ping\Resources\PingTargetResource\Pages;
 
-use Filament\Actions;
-use Wdog\Ping\Resources\PingTargetResource;
 use Filament\Resources\Pages\CreateRecord;
+use Wdog\Ping\Resources\PingTargetResource;
 
 class CreatePingTarget extends CreateRecord
 {

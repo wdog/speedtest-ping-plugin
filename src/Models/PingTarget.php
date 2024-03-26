@@ -2,10 +2,9 @@
 
 namespace Wdog\Ping\Models;
 
-use Wdog\Ping\Models\PingResult;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PingTarget extends Model
 {
@@ -28,7 +27,6 @@ class PingTarget extends Model
      * @var array
      */
     protected $casts = [];
-
 
     public function PingResults(): HasMany
     {

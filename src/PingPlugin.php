@@ -2,8 +2,8 @@
 
 namespace Wdog\Ping;
 
-use Filament\Panel;
 use Filament\Contracts\Plugin;
+use Filament\Panel;
 use Wdog\Ping\Resources\PingTargetResource;
 
 class PingPlugin implements Plugin
@@ -19,8 +19,8 @@ class PingPlugin implements Plugin
     }
 
     public function register(Panel $panel): void
-    { 
-       
+    {
+
         $panel
             ->resources([
                 PingTargetResource::class,

@@ -3,14 +3,14 @@
 namespace Wdog\Ping\Models;
 
 use App\Enums\ResultStatus;
-use Illuminate\Support\Arr;
 use App\Settings\GeneralSettings;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Arr;
 
 class PingResult extends Model
 {
@@ -23,7 +23,7 @@ class PingResult extends Model
      */
     protected $fillable = [
         'ping',
-        'data'
+        'data',
     ];
 
     /**
