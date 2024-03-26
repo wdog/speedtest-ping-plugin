@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
+use Wdog\Ping\Commands\PingRunCommand;
 
 class PingServiceProvider extends PackageServiceProvider
 {
@@ -20,7 +21,7 @@ class PingServiceProvider extends PackageServiceProvider
             ->name(static::$name)
             ->hasMigration('create_ping_tables')
             ->hasAssets()
-            ->hasCommand(PingTest::class)
+            ->hasCommand(PingRunCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command            
                     ->publishMigrations()
@@ -37,7 +38,7 @@ class PingServiceProvider extends PackageServiceProvider
 
         $this->app->booted(function () {
             $schedule = app(Schedule::class);
-            $schedule->command('ping:run')->everyMinute();
+            //$schedule->command('ping:run')->everyMinute();
         });
     }
 
