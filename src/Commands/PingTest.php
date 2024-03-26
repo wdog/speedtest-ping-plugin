@@ -4,7 +4,7 @@ namespace Wdog\Ping\Commands;
 
 use Illuminate\Console\Command;
 
-class Install extends Command
+class PingTest extends Command
 {
     /**
      * The name and signature of the console command.
