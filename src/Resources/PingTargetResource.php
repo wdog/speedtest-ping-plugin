@@ -13,11 +13,13 @@ use Wdog\Ping\Models\PingTarget;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Wdog\Ping\Resources\PingTargetResource\Pages\EditPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ListPingTarget;
+use Wdog\Ping\Resources\PingTargetResource\Pages\ViewPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\CreatePingTarget;
-
+use Wdog\Ping\Resources\PingTargetResource\RelationManagers\PingResultsRelationManager;
 
 class PingTargetResource extends Resource
 {
@@ -49,13 +51,15 @@ class PingTargetResource extends Resource
                         ->hint(new HtmlString('&#x1f517;<a href="https://crontab.cronhub.io/" target="_blank" rel="nofollow">Cron Generator</a>'))
                         ->nullable()
 
-                ])->columns(2),
+                ])->columns(3),
             ]);
     }
 
     public static function table(Table $table): Table
     {
+
         return $table
+            ->recordAction(ViewPingTarget::class)
             ->columns([
                 TextColumn::make('id'),
                 TextColumn::make('target_ip'),
@@ -67,6 +71,8 @@ class PingTargetResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -78,7 +84,7 @@ class PingTargetResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PingResultsRelationManager::class
         ];
     }
 
@@ -87,6 +93,7 @@ class PingTargetResource extends Resource
         return [
             'index' => ListPingTarget::route('/'),
             'create' => CreatePingTarget::route('/create'),
+            'view' => ViewPingTarget::route('/{record}'),
             'edit' => EditPingTarget::route('/{record}/edit'),
         ];
     }

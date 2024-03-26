@@ -21,7 +21,10 @@ class PingResult extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'ping',
+        'data'
+    ];
 
     /**
      * The attributes that should be cast.
@@ -30,8 +33,8 @@ class PingResult extends Model
      */
     protected $casts = [
         'data' => 'array',
-        'status' => ResultStatus::class,
-        'scheduled' => 'boolean',
+        // 'status' => ResultStatus::class,
+        // 'scheduled' => 'boolean',
     ];
 
     /**

@@ -22,7 +22,10 @@ return new class extends Migration
         });
         Schema::create('ping_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(PingTarget::class);
+            $table->foreignIdFor(PingTarget::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->float('ping', 8, 3);
             $table->json('data'); // is a dump of the cli output in case we want more fields later
             $table->timestamps();
