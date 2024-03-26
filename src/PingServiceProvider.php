@@ -3,8 +3,6 @@
 namespace Wdog\Ping;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Wdog\Ping\Commands\PingTest;
-use Illuminate\Support\Facades\Log;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -23,23 +21,10 @@ class PingServiceProvider extends PackageServiceProvider
             ->hasAssets()
             ->hasCommand(PingRunCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
-                $command            
+                $command
                     ->publishMigrations()
                     ->askToRunMigrations();
             });
-
-                 
-    }
-
-
-    public function boot()
-    {
-        
-
-        $this->app->booted(function () {
-            $schedule = app(Schedule::class);
-            //$schedule->command('ping:run')->everyMinute();
-        });
     }
 
 
