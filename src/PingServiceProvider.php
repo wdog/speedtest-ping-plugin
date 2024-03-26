@@ -28,4 +28,13 @@ class PingServiceProvider extends PackageServiceProvider
     }
 
 
+    public function boot()
+    {
+        parent::boot();
+
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('ping:run')->everyMinute();
+        });
+    }
 }
