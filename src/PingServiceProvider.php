@@ -28,9 +28,9 @@ class PingServiceProvider extends PackageServiceProvider
     }
 
 
-    public function boot()
+    public function packageBooted()
     {
-        parent::boot();
+        
 
         $this->app->booted(function () {
             $schedule = app(Schedule::class);
