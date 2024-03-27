@@ -2,9 +2,13 @@
 
 namespace Wdog\Ping\Resources\PingTargetResource\Widgets;
 
+
+
+use Filament\Support\RawJs;
 use App\Helpers\TimeZoneHelper;
 use App\Settings\GeneralSettings;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Facades\Log;
 
 class PingOverview extends ChartWidget
 {
@@ -15,6 +19,9 @@ class PingOverview extends ChartWidget
     protected int|string|array $columnSpan = 'full';
 
     protected static ?string $maxHeight = '250px';
+
+    public ?string $filter = '5m';
+
 
     public $record;
 
@@ -57,7 +64,7 @@ class PingOverview extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Ping Latency',
-                    'data' => $results->map(fn ($item) => ! blank($item->ping) ?
+                    'data' => $results->map(fn ($item) => !blank($item->ping) ?
                         $item->ping
                         : 0),
                     'borderColor' => '#0ea5e9',
@@ -68,11 +75,26 @@ class PingOverview extends ChartWidget
                 ],
             ],
             'labels' => $results->map(fn ($item) => $item->created_at->timezone(TimeZoneHelper::displayTimeZone($settings))->format('M d - G:i')),
+
         ];
     }
 
     protected function getType(): string
     {
         return 'line';
+    }
+
+
+    protected function getOptions(): array
+    {
+
+        return  [
+            'plugins' => [
+                'subtitle' => [
+                    'display' => true,
+                    'text' => $this->record->target_name
+                ]
+            ],
+        ];
     }
 }
