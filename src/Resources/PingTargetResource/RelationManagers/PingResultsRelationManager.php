@@ -10,7 +10,7 @@ use Filament\Tables\Table;
 
 class PingResultsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'pingresults';
+    protected static string $relationship = 'results';
 
     public function form(Form $form): Form
     {

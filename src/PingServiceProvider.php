@@ -2,13 +2,17 @@
 
 namespace Wdog\Ping;
 
+use Wdog\Ping\Actions\RunPingTest;
 use Illuminate\Support\Facades\Log;
 use Wdog\Ping\Commands\PingRunCommand;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelPackageTools\Package;
 use Illuminate\Console\Scheduling\Schedule;
+use Wdog\Ping\Commands\RunScheduledPingTest;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
+use Wdog\Ping\Actions\RunScheduledPingTest as ActionsRunScheduledPingTest;
+use Wdog\Ping\Commands\DemoPingTest;
 
 class PingServiceProvider extends PackageServiceProvider
 {
@@ -21,7 +25,7 @@ class PingServiceProvider extends PackageServiceProvider
             ->name(static::$name)
             ->hasMigration('create_ping_tables')
             ->hasAssets()
-            ->hasCommand(PingRunCommand::class)
+            ->hasCommands([ActionsRunScheduledPingTest::class, DemoPingTest::class])
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishMigrations()
@@ -34,9 +38,7 @@ class PingServiceProvider extends PackageServiceProvider
     {
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('ping:run')->everyMinute();
+            $schedule->command('ping:run-scheduled-ping')->everyMinute();
         });
     }
-
-   
 }

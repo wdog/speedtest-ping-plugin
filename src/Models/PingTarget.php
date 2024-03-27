@@ -28,7 +28,7 @@ class PingTarget extends Model
      */
     protected $casts = [];
 
-    public function PingResults(): HasMany
+    public function results(): HasMany
     {
         return $this->hasMany(PingResult::class);
     }
