@@ -14,7 +14,6 @@ class RunPingTest
 
     public function handle(PingTarget $target, bool $scheduled = false): void
     {
-        dump($target);
 
         $target->results()->create([
             'scheduled' => $scheduled,

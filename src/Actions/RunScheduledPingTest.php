@@ -26,11 +26,12 @@ class RunScheduledPingTest
             Storage::disk('local')->append('log.txt', "\n".$target->target_name.' '.$cronExpression);
 
             if ($cronExpression->isDue(now()->timezone($settings->timezone ?? 'UTC'))) {
-                Storage::disk('local')->append('log.txt', 'RUN');
+                Storage::disk('local')->append('log.txt', 'RUN ' . $target->id);
                 RunPingTest::run($target);
             } else {
                 Storage::disk('local')->append('log.txt', 'NO RUN');
             }
         }
+        Storage::disk('local')->append('log.txt', "-----------------");
     }
 }
