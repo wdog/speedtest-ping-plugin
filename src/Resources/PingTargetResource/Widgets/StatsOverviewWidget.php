@@ -30,6 +30,7 @@ class StatsOverviewWidget extends BaseWidget
             ->latest()
             ->first();
 
+        /** if no ping result */    
         if (blank($latest_result)) {
             return [
                 Stat::make('Latest ping', '-')
@@ -41,6 +42,7 @@ class StatsOverviewWidget extends BaseWidget
             ];
         }
 
+        /** if only one ping result  */
         $previous = $this->record->results()
             ->select(['id', 'ping', 'created_at'])
             ->where('id', '<', $latest_result->id)
@@ -63,6 +65,7 @@ class StatsOverviewWidget extends BaseWidget
             ];
         }
 
+        /** if more than one ping show percent change */
         $pingChange = percentChange($latest_result->ping, $previous->ping, 2);
 
         return [
@@ -76,7 +79,7 @@ class StatsOverviewWidget extends BaseWidget
             Stat::make('Ping Count', $this->record->results()->count())
                 ->color('success')
                 ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                ->description("ping " . random_int(0, 10000))
+                ->description("ping " )
 
         ];
     }
