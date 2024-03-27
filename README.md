@@ -11,38 +11,41 @@ sail up -d
 sail artisan telescope:install
 sail artisan app:install --force
 
+```
 
+## develop
+
+```bash
 mkdir -p packages/wdog
 cd packages/wdog
-git clone git clone ssh://git@192.168.88.100:2222/wdog/Ping.git ping
-
+git clone git clone <REPO> ping
+```
 
 Modify main `composer.json`
 
 ```json
 "require": {
-       "wdog/ping": "dev-main"
+    "wdog/ping": "dev-main"
 },
 
-"repositories": [
-    {
+"repositories": [{
         "type": "path",
         "url": "packages/wdog/ping",
         "options": {
             "symlink": true
         }
-    }
-    ]
+}]
 ```
 
+
 ```bash
-# main project
+# in main project
 composer upgrade --ignore-platform-req=ext-intl
 sail artisan ping:install
 ```
 
 
-To Apply Plugin to PANEL add to `Providers/Filamente/AdminPanelProvider.php`
+To Apply Plugin to Admin Panel adding these lines to `Providers/Filamente/AdminPanelProvider.php`
 
 ```php
 $panel->plugins([
@@ -51,8 +54,16 @@ $panel->plugins([
 ```
 
 
-# run queue
+## Run Queue
+
+```bash
 sail artisan queue:work
-# lint
+sail artisan schedule:list
+```
+
+## Lint
+
+```bash
 sail bin duster lint --using=pint -v
+sail bin duster fix --using=pint -v
 ```
