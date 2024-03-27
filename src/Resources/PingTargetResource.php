@@ -94,4 +94,6 @@ class PingTargetResource extends Resource
             'edit' => EditPingTarget::route('/{record}/edit'),
         ];
     }
+
+   
 }

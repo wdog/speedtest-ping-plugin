@@ -5,6 +5,7 @@ namespace Wdog\Ping\Resources\PingTargetResource\Pages;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Wdog\Ping\Resources\PingTargetResource;
+use Wdog\Ping\Resources\PingTargetResource\Widgets\PingOverview;
 
 class ListPingTarget extends ListRecords
 {
@@ -16,4 +17,7 @@ class ListPingTarget extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+
+ 
 }
