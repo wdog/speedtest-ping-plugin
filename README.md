@@ -1,7 +1,9 @@
 # PING PLUGIN
 
 
-## install steps for development
+Ping tracker plugin for [Alexjustseen - SpeedTest Tracker](https://github.com/alexjustesen/speedtest-tracker)
+
+## Install for development
 
 
 ```bash
@@ -13,7 +15,7 @@ sail artisan app:install --force
 
 ```
 
-## develop
+## Develop
 
 ```bash
 mkdir -p packages/wdog
