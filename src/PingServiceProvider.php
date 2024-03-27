@@ -2,11 +2,13 @@
 
 namespace Wdog\Ping;
 
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Log;
+use Wdog\Ping\Commands\PingRunCommand;
+use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelPackageTools\Package;
+use Illuminate\Console\Scheduling\Schedule;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
-use Wdog\Ping\Commands\PingRunCommand;
 
 class PingServiceProvider extends PackageServiceProvider
 {
@@ -27,12 +29,14 @@ class PingServiceProvider extends PackageServiceProvider
             });
     }
 
-    // public function boot()
-    // {
-    //     parent::boot();
-    //     $this->app->booted(function () {
-    //         $schedule = $this->app->make(Schedule::class);
-    //         $schedule->command('ping:run')->everyMinute();
-    //     });
-    // }
+
+    public function bootingPackage()
+    {
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('ping:run')->everyMinute();
+        });
+    }
+
+   
 }
