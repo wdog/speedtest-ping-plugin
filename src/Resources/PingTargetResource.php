@@ -19,6 +19,7 @@ use Wdog\Ping\Resources\PingTargetResource\Pages\ListPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ViewPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\RelationManagers\PingResultsRelationManager;
 use Wdog\Ping\Resources\PingTargetResource\Widgets\PingOverview;
+use Wdog\Ping\Resources\PingTargetResource\Widgets\StatsOverviewWidget;
 
 class PingTargetResource extends Resource
 {
@@ -101,6 +102,7 @@ class PingTargetResource extends Resource
     {
         return [
             PingOverview::class,
+            StatsOverviewWidget::class,
         ];
     }
 }

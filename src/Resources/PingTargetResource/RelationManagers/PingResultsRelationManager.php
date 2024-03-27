@@ -12,6 +12,11 @@ class PingResultsRelationManager extends RelationManager
 {
     protected static string $relationship = 'results';
 
+    protected $listeners = [
+        'refreshPing' => '$refresh'
+    ];
+
+
     public function form(Form $form): Form
     {
         return $form
@@ -26,7 +31,8 @@ class PingResultsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('created_at')
+        ->poll('10s')
+        ->recordTitleAttribute('created_at')
             ->columns([
                 Tables\Columns\TextColumn::make('ping')->suffix(' ms'),
                 Tables\Columns\TextColumn::make('data'),

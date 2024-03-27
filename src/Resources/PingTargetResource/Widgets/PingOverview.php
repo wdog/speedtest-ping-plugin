@@ -2,10 +2,9 @@
 
 namespace Wdog\Ping\Resources\PingTargetResource\Widgets;
 
-
-
-use Filament\Support\RawJs;
 use App\Helpers\TimeZoneHelper;
+use Wdog\Ping\Models\PingResult;
+use Wdog\Ping\Models\PingTarget;
 use App\Settings\GeneralSettings;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\Log;
@@ -16,14 +15,15 @@ class PingOverview extends ChartWidget
 
     protected static ?string $heading = 'Ping Latency';
 
-    protected int|string|array $columnSpan = 'full';
-
     protected static ?string $maxHeight = '250px';
 
     public ?string $filter = '5m';
 
+    public ?PingTarget $record;
 
-    public $record;
+    protected $listeners = [
+        'refreshPing' => '$refresh'
+    ];
 
     protected function getFilters(): ?array
     {
@@ -40,6 +40,8 @@ class PingOverview extends ChartWidget
     {
         $settings = new GeneralSettings();
 
+       
+       
         $results = $this->record->results()
             ->select(['id', 'ping', 'created_at'])
             ->when($this->filter == '5m', function ($query) {
@@ -60,6 +62,7 @@ class PingOverview extends ChartWidget
             ->orderBy('created_at')
             ->get();
 
+       
         return [
             'datasets' => [
                 [
@@ -84,17 +87,26 @@ class PingOverview extends ChartWidget
         return 'line';
     }
 
-
     protected function getOptions(): array
     {
 
-        return  [
+        return [
+            'scales' => [
+                'y' => [
+                    'beginAtZero' => true,
+                ],
+            ],
             'plugins' => [
                 'subtitle' => [
                     'display' => true,
-                    'text' => $this->record->target_name
-                ]
+                    'text' => $this->record?->target_name,
+                ],
             ],
         ];
+    }
+
+    protected function getPollingInterval(): ?string
+    {
+        return config('speedtest.dashboard_polling');
     }
 }
