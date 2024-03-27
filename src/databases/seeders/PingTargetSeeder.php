@@ -1,6 +1,6 @@
 <?php
 
-namespace Wdog\Ping\Database\Seeders;
+namespace Wdog\Ping\Databases\Seeders;
 
 use Illuminate\Database\Seeder;
 use Wdog\Ping\Models\PingTarget;
