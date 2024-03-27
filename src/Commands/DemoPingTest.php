@@ -3,7 +3,6 @@
 namespace Wdog\Ping\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class DemoPingTest extends Command
 {
@@ -26,7 +25,6 @@ class DemoPingTest extends Command
      */
     public function handle()
     {
-        Storage::disk('local')->append('log.txt', date('Y-m-d H:i:s').' - COMMAND');
 
         echo \Carbon\Carbon::now();
     }
