@@ -2,15 +2,13 @@
 
 namespace Wdog\Ping;
 
-use Wdog\Ping\Commands\DemoPingTest;
-
-use Spatie\LaravelPackageTools\Package;
 use Illuminate\Console\Scheduling\Schedule;
-use Wdog\Ping\Actions\RunScheduledPingTest;
-use Wdog\Ping\Database\Seeders\PingTargetSeeder;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
-
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Wdog\Ping\Actions\RunScheduledPingTest;
+use Wdog\Ping\Commands\DemoPingTest;
+use Wdog\Ping\Database\Seeders\PingTargetSeeder;
 
 class PingServiceProvider extends PackageServiceProvider
 {

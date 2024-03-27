@@ -21,7 +21,7 @@ class ViewPingTarget extends ViewRecord
     protected function getHeaderWidgets(): array
     {
         return [
-            PingOverview::class
+            PingOverview::make([$this->record]),
         ];
     }
 }

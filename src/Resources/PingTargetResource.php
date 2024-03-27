@@ -18,6 +18,7 @@ use Wdog\Ping\Resources\PingTargetResource\Pages\EditPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ListPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\Pages\ViewPingTarget;
 use Wdog\Ping\Resources\PingTargetResource\RelationManagers\PingResultsRelationManager;
+use Wdog\Ping\Resources\PingTargetResource\Widgets\PingOverview;
 
 class PingTargetResource extends Resource
 {
@@ -62,6 +63,7 @@ class PingTargetResource extends Resource
                 TextColumn::make('target_ip'),
                 TextColumn::make('target_name'),
                 TextColumn::make('target_schedule'),
+                TextColumn::make('results_count')->badge()->alignCenter()->color('info')->counts('results'),
             ])
             ->filters([
                 //
@@ -95,5 +97,10 @@ class PingTargetResource extends Resource
         ];
     }
 
-   
+    public static function getWidgets(): array
+    {
+        return [
+            PingOverview::class,
+        ];
+    }
 }
