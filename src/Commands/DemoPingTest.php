@@ -26,7 +26,7 @@ class DemoPingTest extends Command
      */
     public function handle()
     {
-        Storage::disk('local')->append('log.txt', date("Y-m-d H:i:s") . " - COMMAND");
+        Storage::disk('local')->append('log.txt', date('Y-m-d H:i:s').' - COMMAND');
 
         echo \Carbon\Carbon::now();
     }

@@ -2,17 +2,13 @@
 
 namespace Wdog\Ping;
 
-use Wdog\Ping\Actions\RunPingTest;
-use Illuminate\Support\Facades\Log;
-use Wdog\Ping\Commands\PingRunCommand;
-use Illuminate\Support\Facades\Storage;
-use Spatie\LaravelPackageTools\Package;
 use Illuminate\Console\Scheduling\Schedule;
-use Wdog\Ping\Commands\RunScheduledPingTest;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
-use Wdog\Ping\Actions\RunScheduledPingTest as ActionsRunScheduledPingTest;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Wdog\Ping\Actions\RunScheduledPingTest;
 use Wdog\Ping\Commands\DemoPingTest;
+use Wdog\Ping\Database\Seeders\PingTargetSeeder;
 
 class PingServiceProvider extends PackageServiceProvider
 {
@@ -25,14 +21,18 @@ class PingServiceProvider extends PackageServiceProvider
             ->name(static::$name)
             ->hasMigration('create_ping_tables')
             ->hasAssets()
-            ->hasCommands([ActionsRunScheduledPingTest::class, DemoPingTest::class])
+            ->hasCommands([RunScheduledPingTest::class, DemoPingTest::class])
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishMigrations()
-                    ->askToRunMigrations();
+                    ->askToRunMigrations()
+                    ->endWith(function (InstallCommand $command) {
+                        $command->info('Have a great day!');
+                        $seeder = new PingTargetSeeder();
+                        $seeder->run();
+                    });
             });
     }
-
 
     public function bootingPackage()
     {
