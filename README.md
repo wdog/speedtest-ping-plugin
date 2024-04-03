@@ -69,3 +69,15 @@ sail artisan schedule:list
 sail bin duster lint --using=pint -v
 sail bin duster fix --using=pint -v
 ```
+
+
+## install ping 
+
+
+change `docker/8.2/Dockerfile` (row 45)
+
+```bash
+...
+  && apt-get install -y speedtest iputils-ping \
+...
+```

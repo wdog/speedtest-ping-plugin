@@ -16,7 +16,6 @@ class RunPingTest
     public function handle(PingTarget $target): void
     {
 
-
         $result = $target->results()->create([
             'status' => ResultStatus::Started,
             'ping' => 0,
