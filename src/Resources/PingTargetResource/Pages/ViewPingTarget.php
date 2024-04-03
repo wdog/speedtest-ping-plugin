@@ -4,7 +4,6 @@ namespace Wdog\Ping\Resources\PingTargetResource\Pages;
 
 use Filament\Actions;
 use Filament\Actions\Action;
-use Illuminate\Support\Facades\Log;
 use Filament\Resources\Pages\ViewRecord;
 use Wdog\Ping\Resources\PingTargetResource;
 use Wdog\Ping\Resources\PingTargetResource\Widgets\PingOverview;
@@ -12,9 +11,8 @@ use Wdog\Ping\Resources\PingTargetResource\Widgets\StatsOverviewWidget;
 
 class ViewPingTarget extends ViewRecord
 {
-
     protected $listeners = [
-        'refreshPing' => '$refresh'
+        'refreshPing' => '$refresh',
     ];
 
     protected static string $resource = PingTargetResource::class;
@@ -34,11 +32,8 @@ class ViewPingTarget extends ViewRecord
                 ->after(fn ($livewire) => $livewire->dispatch('refreshPing'))
                 ->requiresConfirmation(),
 
-
         ];
     }
-
-
 
     protected function getHeaderWidgets(): array
     {

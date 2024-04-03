@@ -28,7 +28,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->float('ping', 8, 3);
-            $table->json('data'); 
+            $table->json('data')->nullable(); 
             $table->string('status');
             $table->timestamps();
         });
@@ -40,7 +40,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('ping_results');
-        // Schema::dropIfExists('ping_targets');
+        Schema::dropIfExists('ping_targets');
 
     }
 };

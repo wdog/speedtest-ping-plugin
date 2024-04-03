@@ -3,11 +3,9 @@
 namespace Wdog\Ping\Resources\PingTargetResource\Widgets;
 
 use App\Helpers\TimeZoneHelper;
-use Wdog\Ping\Models\PingResult;
-use Wdog\Ping\Models\PingTarget;
 use App\Settings\GeneralSettings;
 use Filament\Widgets\ChartWidget;
-use Illuminate\Support\Facades\Log;
+use Wdog\Ping\Models\PingTarget;
 
 class PingOverview extends ChartWidget
 {
@@ -22,7 +20,7 @@ class PingOverview extends ChartWidget
     public ?PingTarget $record;
 
     protected $listeners = [
-        'refreshPing' => '$refresh'
+        'refreshPing' => '$refresh',
     ];
 
     protected function getFilters(): ?array
@@ -40,8 +38,6 @@ class PingOverview extends ChartWidget
     {
         $settings = new GeneralSettings();
 
-       
-       
         $results = $this->record->results()
             ->select(['id', 'ping', 'created_at'])
             ->when($this->filter == '5m', function ($query) {
@@ -62,12 +58,11 @@ class PingOverview extends ChartWidget
             ->orderBy('created_at')
             ->get();
 
-       
         return [
             'datasets' => [
                 [
                     'label' => 'Ping Latency',
-                    'data' => $results->map(fn ($item) => !blank($item->ping) ?
+                    'data' => $results->map(fn ($item) => ! blank($item->ping) ?
                         $item->ping
                         : 0),
                     'borderColor' => '#0ea5e9',
