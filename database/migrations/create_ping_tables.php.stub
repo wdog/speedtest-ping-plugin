@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('target_schedule',20)->nullable();
             $table->timestamps();
         });
+
         Schema::create('ping_results', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(PingTarget::class)
@@ -27,7 +28,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->float('ping', 8, 3);
-            $table->json('data'); // is a dump of the cli output in case we want more fields later
+            $table->json('data'); 
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -37,8 +39,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ping_targets');
         Schema::dropIfExists('ping_results');
+        // Schema::dropIfExists('ping_targets');
 
     }
 };

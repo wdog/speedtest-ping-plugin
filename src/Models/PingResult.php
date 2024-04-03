@@ -24,6 +24,7 @@ class PingResult extends Model
     protected $fillable = [
         'ping',
         'data',
+        'status',
     ];
 
     /**
@@ -33,8 +34,7 @@ class PingResult extends Model
      */
     protected $casts = [
         'data' => 'array',
-        // 'status' => ResultStatus::class,
-        // 'scheduled' => 'boolean',
+        'status' => ResultStatus::class,
     ];
 
     /**

@@ -42,13 +42,14 @@ class StatsOverviewWidget extends BaseWidget
             ];
         }
 
+        
         /** if only one ping result  */
         $previous = $this->record->results()
             ->select(['id', 'ping', 'created_at'])
             ->where('id', '<', $latest_result->id)
             ->latest()
             ->first();
-
+        
         if (!$previous) {
             return [
                 Stat::make(

@@ -2,9 +2,11 @@
 
 namespace Wdog\Ping\Actions;
 
+use App\Enums\ResultStatus;
 use App\Events\SpeedtestStarted;
 use App\Jobs\Speedtests\ExecuteOoklaSpeedtest;
 use App\Models\Result;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Wdog\Ping\Models\PingTarget;
 
@@ -16,7 +18,7 @@ class RunPingTest
     {
 
         $result = $target->results()->create([
-            'scheduled' => $scheduled,
+            'stutus' => ResultStatus::Started,
             'ping' => 0,
             'data' => $scheduled,
         ]);
@@ -25,8 +27,11 @@ class RunPingTest
         $latency = $ping->ping();
         if ($latency !== false) {
             $result->ping = $latency;
+            $result->status = ResultStatus::Completed;
         } else {
-            $result->data = 'could not be reached';
+            // $result->data = ['error' => 'target unreachable'];
+            $result->data = ['error' => $ping->getCommandOutput()];
+            $result->status = ResultStatus::Failed;
         }
         $result->save();
 
